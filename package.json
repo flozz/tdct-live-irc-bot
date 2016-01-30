@@ -9,8 +9,11 @@
   "author": "Fabien LOISON <http://www.flozz.fr/>",
   "license": "GPL-3.0",
   "dependencies": {
+    "abitbol": "^1.0.3",
     "irc": "^0.4.1",
     "lodash": "^4.1.0",
-    "nconf": "^0.8.2"
+    "nconf": "^0.8.2",
+    "q": "^1.4.1",
+    "rss-parser": "^2.2.2"
   }
 }
