@@ -6,6 +6,10 @@ var Q = require("q");
 
 var baseUrl = "https://forum.ubuntu-fr.org/extern.php?action=feed&type=rss&tid=";
 
+function authorFilter(string) {
+    return string.replace(/^.+\s+\((.+)\)$/, "$1");
+}
+
 var UfrTopicReader = Class.$extend({
 
     __init__: function() {
@@ -47,7 +51,7 @@ var UfrTopicReader = Class.$extend({
                             break;
                         }
                         result.push({
-                            author: parsed.feed.entries[i].author,          // FIXME parse
+                            author: authorFilter(parsed.feed.entries[i].author),
                             message: parsed.feed.entries[i].contentSnippet  // FIXME content, parse
                         });
                     }
@@ -62,16 +66,5 @@ var UfrTopicReader = Class.$extend({
     }
 
 });
-
-
-var test = new UfrTopicReader();
-function loop() {
-    test.getNewPosts().then(function(posts) {
-        console.log(posts);
-    });
-    setTimeout(loop, 1000 * 60);
-}
-loop();
-
 
 module.exports = UfrTopicReader;
