@@ -1,0 +1,16 @@
+{
+  "name": "tdct-live-irc-bot",
+  "version": "0.1.0",
+  "description": "An IRC bot to follow the TdCT on ##tdct-live (irc.freenode.net)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Fabien LOISON <http://www.flozz.fr/>",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "irc": "^0.4.1",
+    "lodash": "^4.1.0",
+    "nconf": "^0.8.2"
+  }
+}
