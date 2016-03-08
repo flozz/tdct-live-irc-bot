@@ -1,5 +1,8 @@
 "use strict";
 
+var MESSAGE_MAX_LENGTH = 1000;
+var IGNORED_USERS = ["compteur-couche-tard"];
+
 var path = require("path");
 
 var irc = require("irc");
@@ -102,8 +105,16 @@ function topicLoop() {
     topicReader.getNewPosts()
         .then(function(posts) {
             for (var i = posts.length - 1 ; i >= 0 ; i--) {
+                if (_.includes(IGNORED_USERS, posts[i].author)) {
+                    continue;
+                }
                 client.say(nconf.get("channel"), _.padEnd("--- " + posts[i].author + " ", 40, "-"));
-                client.say(nconf.get("channel"), posts[i].message);
+                if (posts[i].message.length <= MESSAGE_MAX_LENGTH) {
+                    client.say(nconf.get("channel"), posts[i].message);
+                } else {
+                    client.say(nconf.get("channel"), posts[i].message.substring(0, MESSAGE_MAX_LENGTH));
+                    client.say(nconf.get("channel"), "[...] " + posts[i].link);
+                }
             }
             setTimeout(topicLoop, 60 * 1000);
         })
