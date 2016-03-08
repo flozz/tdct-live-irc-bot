@@ -51,7 +51,7 @@ var UfrTopicReader = Class.$extend({
                             break;
                         }
                         result.push({
-                            link: parsed.feed.link,
+                            link: parsed.feed.entries[i].link,
                             author: authorFilter(parsed.feed.entries[i].author),
                             message: parsed.feed.entries[i].contentSnippet  // FIXME content, parse
                         });
